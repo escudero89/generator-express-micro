@@ -7,6 +7,16 @@ Starting a project from scratch with Express is easy -- there are already countl
 
 The Express Micro API Generator is here to help you with scaffolding all the boring details of an API. Logging? Got you covered, `bunyan` and its companion middleware are already set up from the start. Storage? Well, we don't enforce database designs, but repositories come with `Rx` and events bundled. Authentication? We put `jwt`, but you can swap it for `Passport.JS` or `passwordless`!
 
+Installing
+----------
+
+Do I have to explain *everything* to you?
+
+    npm install -g generator-express-micro
+
+There. Copy and paste. Doesn't get any easier.
+
+
 What's included
 ---------------
 
