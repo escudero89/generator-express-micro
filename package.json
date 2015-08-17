@@ -1,0 +1,25 @@
+{
+  "name": "generator-express-api",
+  "version": "0.1.0",
+  "description": "Generator for APIs using Express as a microservice server",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "files": [
+    "app",
+    "route",
+    "repository",
+    "controller",
+    "service",
+    "middleware"
+  ],
+  "author": "Pablo Alejandro Costesich",
+  "keywords": [
+    "yeoman-generator"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "yeoman-generator": "^0.20.2"
+  }
+}
