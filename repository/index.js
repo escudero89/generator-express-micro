@@ -18,7 +18,7 @@ module.exports = generators.Base.extend({
     };
 
     this.fs.copyTpl(
-      this.templatePath('default.js'),
+      this.templatePath('default.js.ejs'),
       this.destinationPath('app/repositories/' + this.name + '.js'),
       commonEnv
     );

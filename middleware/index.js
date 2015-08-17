@@ -18,7 +18,7 @@ module.exports = generators.Base.extend({
     };
 
     this.fs.copyTpl(
-      this.templatePath('middleware.js'),
+      this.templatePath('middleware.js.ejs'),
       this.destinationPath('app/middlewares/' + this.name + '.js'),
       commonEnv
     );
