@@ -1,6 +1,7 @@
 The Express Micro API Generator
 ===============================
 
+![David Status](https://david-dm.org/pcostesi/generator-express-micro.svg?) [![bitHound Score](https://www.bithound.io/github/pcostesi/generator-express-micro/badges/score.svg?)](https://www.bithound.io/github/pcostesi/generator-express-micro)
 
 Starting a project from scratch with Express is easy -- there are already countless generators that do so. However, these projects are entirely based around building websites. In an age of microservices and small APIs, the standard structure of an Express app is cumbersome and does not help with the separation of concerns we expect.
 
@@ -39,3 +40,10 @@ Other commands are:
     yo express-micro:middleware middleware
     yo express-micro:repository myRepo
     yo express-micro:service myService
+
+Stats
+-----
+
+Because why not?
+
+[![NPM](https://nodei.co/npm/generator-express-micro.png)](https://nodei.co/npm/generator-express-micro/)
