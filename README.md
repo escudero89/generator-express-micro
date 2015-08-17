@@ -26,16 +26,16 @@ Commands
 
 We assume you already set up your local repo and project folder. You know, the place where you will put your `README.md`, `.gitignore` and `LICENSE.md` (remember your license!). If you haven't, just `mkdir my-awesome-project` and `cd` inside it.
 
-  yo express-micro
+    yo express-micro
 
 Will create all the folders, files and stuff you need for the project to work. It will ask you for a project name! Usually it's the same as the parent folder. Be creative!
 
-  yo express-micro:controller myController
+    yo express-micro:controller myController
 
 Will create a new `controller`. It will _not_ bind it to a route or to the app just yet, working on that! (we're still far from 1.0!)
 
 Other commands are:
 
-  yo express-micro:middleware middleware
-  yo express-micro:repository myRepo
-  yo express-micro:service myService
+    yo express-micro:middleware middleware
+    yo express-micro:repository myRepo
+    yo express-micro:service myService
