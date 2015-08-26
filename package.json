@@ -20,6 +20,9 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "bluebird": "^2.9.34",
+    "escodegen": "^1.6.1",
+    "esprima": "^2.5.0",
     "yeoman-generator": "^0.20.2"
   }
 }

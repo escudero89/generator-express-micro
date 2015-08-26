@@ -76,9 +76,9 @@ module.exports = generators.Base.extend({
       this.destinationPath('app/commons.js')
     );
 
-    this.composeWith('express-api:controller', {arguments: ['default']});
-    //this.composeWith('express-api:service', {arguments: ['default']});
-    this.composeWith('express-api:repository', {arguments: ['default']});
+    this.composeWith('express-micro:controller', {arguments: ['default']});
+    this.composeWith('express-micro:service', {arguments: ['default']});
+    this.composeWith('express-micro:repository', {arguments: ['default']});
 
 
     this.config.save();
