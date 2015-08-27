@@ -110,7 +110,7 @@ module.exports = generators.Base.extend({
         ;
 
       insertion = ('router.' + this.method +
-        "('" + this.route + "', controller('" + this.name + "');");
+        "('" + this.route + "', controller('" + this.name + "'));");
 
       contents.splice(point, 0, insertion);
 
