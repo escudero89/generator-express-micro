@@ -18,13 +18,15 @@ module.exports = generators.Base.extend({
       default: this.appname // Default to current folder name
     }, function (answers) {
       this.log(answers.name);
+      this.newAppname = answers.name;
+
       done();
     }.bind(this));
   },
 
   writing: function() {
     var commonEnv = {
-      appName: this.appname,
+      appName: this.newAppname,
       appSecret: crypto.randomBytes(64).toString('hex')
     };
 
@@ -55,12 +57,12 @@ module.exports = generators.Base.extend({
       this.templatePath('_gitignore'),
       this.destinationPath('.gitignore')
     );
-    
+
     this.fs.copy(
       this.templatePath('Gruntfile.js'),
       this.destinationPath('Gruntfile.js')
     );
-    
+
     this.fs.copy(
       this.templatePath('middlewares/errors.js'),
       this.destinationPath('app/middlewares/errors.js')
