@@ -1,22 +1,27 @@
 'use strict';
 
-var routes = require('./routes.js')
-  , express = require('express')
-  , cors = require('cors')
-  , config = require('./config.js')
-  , jwt = require('express-jwt')
-  , bodyParser = require('body-parser')
-  , cookieParser = require('cookie-parser')
-  , http = require('http')
-  , Cluster = require('cluster')
-  , bunyan = require('bunyan')
-  , errorMiddleware = require('./middlewares/errors.js')
-  , expressLogger = require('express-bunyan-logger')
-  ;
+// REQUIRES
 
-var app = express()
-  , logger = bunyan.createLogger(config.logging)
-  ;
+var express = require('express');
+
+var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
+var cors = require('cors');
+var cluster = require('cluster');
+var jwt = require('express-jwt');
+var http = require('http');
+
+var routes = require('./routes.js');
+var config = require('./config.js');
+
+var bunyan = require('bunyan');
+var loggerBunyan = require('express-bunyan-logger');
+var messageHandler = require('./middlewares/errors.js');
+
+/// MAIN APPLICATION
+
+var app = express();
+var logger = bunyan.createLogger(config.logging);
 
 app.use(cors(config.cors));
 app.use(bodyParser.json());
@@ -24,30 +29,35 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(jwt(config.jwt));
 
-app.use(expressLogger(config.logging));
+// Message handling system
+app.use(loggerBunyan(config.logging));
+app.use(messageHandler(config.logging));
+app.use(loggerBunyan.errorLogger(config.logging));
 
 app.use('/api/v1', routes);
 
-app.use(errorMiddleware(config.logging));
-
 function serve(application) {
+
   var server = http.createServer(application);
+
   if (process.env.NODE_ENV === 'production') {
-    new Cluster({
+    new cluster({
       port: config.api.port,
       pids: config.api.clusterPidsDir,
       monPort: config.api.clusterMonitoringPort
+
     }).listen(function (cb) {
-      logger.info('Cluster node ready on port ' + config.api.port);
+      logger.info('Cluster node ready on port', config.api.port);
       cb(server);
     });
+
   } else {
     server.listen(config.api.port, function (err) {
       if (err) {
         logger.error(err);
         throw err;
       }
-      logger.info('Express server listening on port ' + config.api.port);
+      logger.info('Express server listening on port', config.api.port);
     });
   }
 }
