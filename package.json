@@ -1,6 +1,6 @@
 {
   "name": "generator-express-micro",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Generator for APIs using Express as a microservice server",
   "main": "index.js",
   "scripts": {
