@@ -2,6 +2,7 @@
 
 var generators = require('yeoman-generator');
 var crypto = require('crypto');
+var slugify = require('underscore.string/slugify');
 
 module.exports = generators.Base.extend({
   constructor: function() {
@@ -18,6 +19,7 @@ module.exports = generators.Base.extend({
     }, function (answers) {
       this.log(answers.name);
       this.newAppname = answers.name;
+      this.slug = slugify(answers.name);
 
       done();
     }.bind(this));
@@ -26,6 +28,7 @@ module.exports = generators.Base.extend({
   writing: function() {
     var commonEnv = {
       appName: this.newAppname,
+      appSlug: this.slug,
       appSecret: crypto.randomBytes(64).toString('hex')
     };
 

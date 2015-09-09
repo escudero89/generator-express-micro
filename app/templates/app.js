@@ -18,10 +18,14 @@ var bunyan = require('bunyan');
 var loggerBunyan = require('express-bunyan-logger');
 var messageHandler = require('./middlewares/errors.js');
 
+var _ = require('lodash');
+
 /// MAIN APPLICATION
 
 var app = express();
 var logger = bunyan.createLogger(config.logging);
+
+var accessLoggerConfig = _.extend({excludes: '*'}, config.logging);
 
 app.use(cors(config.cors));
 app.use(bodyParser.json());
@@ -30,9 +34,10 @@ app.use(cookieParser());
 app.use(jwt(config.jwt));
 
 // Message handling system
-app.use(loggerBunyan(config.logging));
+app.use(loggerBunyan(accessLoggerConfig));
+
 app.use(messageHandler(config.logging));
-app.use(loggerBunyan.errorLogger(config.logging));
+app.use(loggerBunyan.errorLogger(accessLoggerConfig));
 
 app.use('/api/v1', routes);
 

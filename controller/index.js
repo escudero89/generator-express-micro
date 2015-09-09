@@ -43,7 +43,8 @@ var prompts = {
     message: 'Path to route?',
     default: '/',
     validate: function(response) {
-      return response != '';
+      // Check for invalid chars in the route
+      return !response.match(/[,;]/);
     }
   },
 
@@ -90,7 +91,7 @@ module.exports = generators.Base.extend({
   },
 
   writing: function() {
-    
+
   	var commonEnv = {
   	  controllerName: this.name
     };

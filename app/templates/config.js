@@ -5,7 +5,7 @@ var environments = {
     api: {
       host: '0.0.0.0',
       port: 80,
-      clusterPidsDir: '/var/run/<%= appName %>',
+      clusterPidsDir: '/var/run/<%= appSlug %>',
       monPort: 3000
     },
     jwt: {
