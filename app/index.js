@@ -4,9 +4,15 @@ var generators = require('yeoman-generator');
 var crypto = require('crypto');
 var slugify = require('underscore.string/slugify');
 
+var chalk = require('chalk');
+var yosay = require('yosay');
+
 module.exports = generators.Base.extend({
   constructor: function() {
     generators.Base.apply(this, arguments);
+
+    this.log(yosay('Welcome to the splendid ' + chalk.green('Express-Micro') + ' generator!'));
+    this.log('I will generate the scaffolding for a new and shiny API. Let\'s go for it!');
   },
 
   prompting: function() {
@@ -96,5 +102,11 @@ module.exports = generators.Base.extend({
 
   install: function() {
     this.installDependencies({ bower: false });
+  },
+
+  end: function() {
+    this.log(yosay('My work here is ' + chalk.bold(chalk.green('done')) + '!'));
+    this.log('Run ' + chalk.red('npm start') + ' to see the app in action or ' + chalk.red('npm start | bunyan') + ' for a better info display.');
+    this.log('Visit our source code at ' + chalk.blue('https://github.com/pcostesi/generator-express-micro'));
   }
 });
