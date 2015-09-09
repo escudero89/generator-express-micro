@@ -1,8 +1,7 @@
 'use strict';
 
-var generators = require('yeoman-generator')
-  , crypto = require('crypto')
-  ;
+var generators = require('yeoman-generator');
+var crypto = require('crypto');
 
 module.exports = generators.Base.extend({
   constructor: function() {
@@ -45,6 +44,12 @@ module.exports = generators.Base.extend({
     this.fs.copyTpl(
       this.templatePath('package.json'),
       this.destinationPath('package.json'),
+      commonEnv
+    );
+
+    this.fs.copyTpl(
+      this.templatePath('deploy/_upstart-script.conf'),
+      this.destinationPath('deploy/' + commonEnv.appName + '.conf'),
       commonEnv
     );
 
