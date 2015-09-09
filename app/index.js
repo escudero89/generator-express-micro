@@ -96,7 +96,6 @@ module.exports = generators.Base.extend({
     this.composeWith('express-micro:service', {arguments: ['default']});
     this.composeWith('express-micro:repository', {arguments: ['default']});
 
-
     this.config.save();
   },
 

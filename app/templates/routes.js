@@ -7,12 +7,10 @@
  */
 
 var commons = require('./commons.js')
-  , express = require('express')
-  ;
+var express = require('express');
 
-var controller = commons.controller
-  , router = new express.Router()
-  ;
+var controller = commons.controller;
+var router = new express.Router();
 
 // generator - insert routes here
 

@@ -1,10 +1,8 @@
 'use strict';
 
-var generators = require('yeoman-generator')
-  , esprima = require('esprima')
-  , Promise = require('bluebird')
-  ;
-
+var generators = require('yeoman-generator');
+var esprima = require('esprima');
+var Promise = require('bluebird');
 
 function parseAst(file) {
   return esprima.parse(file, {
@@ -13,20 +11,27 @@ function parseAst(file) {
   });
 }
 
-function findRouteInsertionPoint (file) {
-  var i
-    , ast = parseAst(file)
-    , comment
-    , comments = ast.comments
-    , regex = /generator - insert routes here/gi
-    ;
+function findRouteInsertionPoint(file) {
+  var ast = parseAst(file);
+  var comments = ast.comments;
+  var regex = /generator - insert routes here/gi;
 
-  for (i = 0; i < comments.length; i++) {
-    comment = comments[i];
+  for (var i = 0; i < comments.length; i++) {
+    var comment = comments[i];
     if (comment.value.match(regex)) {
       return comment.loc.start.line;
     }
   }
+}
+
+function sanitizeRoute(route) {
+  var trimmed = route.trim();
+
+  if (trimmed[0] !== '/') {
+    trimmed = '/' + trimmed;
+  }
+
+  return trimmed;
 }
 
 var prompts = {
@@ -69,10 +74,9 @@ module.exports = generators.Base.extend({
   },
 
   prompting: function() {
-    var done = this.async()
-      , prompter = this
-      , extras = [prompts.askForMethod, prompts.askForRoute]
-      ;
+    var done = this.async();
+    var prompter = this;
+    var extras = [prompts.askForMethod, prompts.askForRoute];
 
     function doneAsking(answers) {
       prompter.route = answers.route;
@@ -92,8 +96,8 @@ module.exports = generators.Base.extend({
 
   writing: function() {
 
-  	var commonEnv = {
-  	  controllerName: this.name
+    var commonEnv = {
+      controllerName: this.name
     };
 
     this.fs.copyTpl(
@@ -103,15 +107,15 @@ module.exports = generators.Base.extend({
     );
 
     if (this.addRoute) {
-      var path = this.destinationPath('app/routes.js')
-        , file = this.fs.read(path)
-        , point = findRouteInsertionPoint(file)
-        , insertion
-        , contents = file.toString().split('\n')
-        ;
+      var path = this.destinationPath('app/routes.js');
+      var file = this.fs.read(path);
+      var point = findRouteInsertionPoint(file);
+      var contents = file.toString().split('\n');
 
-      insertion = ('router.' + this.method +
-        "('" + this.route + "', controller('" + this.name + "'));");
+      // We
+
+      var insertion = ('router.' + this.method +
+        "('" + sanitizeRoute(this.route) + "', controller('" + this.name + "'));");
 
       contents.splice(point, 0, insertion);
 

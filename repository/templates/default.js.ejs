@@ -1,12 +1,10 @@
 'use strict';
 
-var events = require('events')
-  , Rx = require('rx')
-  ;
+var events = require('events');
+var Rx = require('rx');
 
-var eventEmitter = new events.EventEmitter()
-  , proto
-  ;
+var eventEmitter = new events.EventEmitter();
+var proto;
 
 module.exports = function <%= name[0].toUpperCase() + name.slice(1) %>Repository() {};
 
